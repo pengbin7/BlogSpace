@@ -1,8 +1,11 @@
 package com.pb.projects.validated.part_one;
 
 import com.pb.projects.validated.part_one.model.User;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * @Author pengbin
@@ -11,8 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class OneController {
 
+
     @PostMapping("/one")
-    public String post(@Validated @RequestBody User user){
+    public String post(@Valid @RequestBody User user, BindingResult errors){
+        if(errors.hasErrors()){
+            return "post error";
+        }
         return "post success";
     }
 
